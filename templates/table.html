@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<br>
+
+<table  cellspacing="5" cellpadding="5">
+    <tbody>
+        <tr>
+        <td>Created date</td>
+        </tr>
+        <tr>
+        <td><input type="text" id="min" name="min"  placeholder="Start date"></td>
+        <td><input type="text" id="max" name="max" placeholder="End date"></td>
+    </tr>
+</tbody></table>
+
+
+</table>
+<br>
+
+<table id="data" class="table table-striped">
+  <thead>
+      <tr>
+          <th width="15%">Order Name</th>
+          <th width="25%">Customer Company</th>
+          <th width="30%">Customer Name Item</th>
+          <th width="10%">Order Date</th>
+          <th width="5%">Delivery Amount</th>
+        </tr>
+  </thead>
+  <tbody>
+      {% for row in orders %}
+      <tr>
+      <td>{{row['order_name']}}</td>
+      <td>{{row['company_name']}}</td>
+      <td>{{row['customer_name']}}</td>
+      <td>{{row['order_date']}}</td>
+      <td>
+      {% if  (row['delivery_amount'] == 0.0) %}
+      - 
+      {% else %} 
+      {{row['delivery_amount']|round(2)}}
+      {% endif %}  
+      </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+
+{% block scripts %}
+   
+
+<script>
+var minDate, maxDate;
+ 
+ // Custom filtering function which will search data in column four between two values
+ $.fn.dataTable.ext.search.push(
+     function( settings, data, dataIndex ) {
+         var min = minDate.val();
+         var max = maxDate.val();
+         var date = new Date( data[4] );
+  
+         if (
+             ( min === null && max === null ) ||
+             ( min === null && date <= max ) ||
+             ( min <= date   && max === null ) ||
+             ( min <= date   && date <= max )
+         ) {
+             return true;
+         }
+         return false;
+     }
+ );
+</script>
+
+<script>
+ $(document).ready(function() {
+     // Create date inputs
+
+     minDate = new DateTime($('#min'), {
+         format: 'MMMM Do YYYY'
+     });
+     maxDate = new DateTime($('#max'), {
+         format: 'MMMM Do YYYY'
+     });
+  
+  
+     $('#data').DataTable( {
+        "lengthMenu": [[5, 10, 15, -1], [5, 10, 25, "All"]],
+    } );  
+
+     var table = $('#data').DataTable();
+
+     // Refilter the table
+     $('#min, #max').on('change', function () { 
+        table.draw();
+     });
+
+
+ });
+</script>
+{% endblock %}
+
+
+
+
+
+

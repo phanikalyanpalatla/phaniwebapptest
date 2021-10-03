@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% block content %}
+<html>
+
+<!doctype html>
+<title>Upload CSV file</title>
+<br>
+<style>
+    input {text-align: center;}
+    form{text-align: center;}
+</style>
+
+<form action="/upload" method=post enctype=multipart/form-data>
+<label>Input For</label>
+<br>
+{{ form.input_for(class='input_for') }}
+<br>
+<br>
+<br>
+<p><input type=file name=file>
+    <br>
+    <br>
+    <input type=submit value=Submit>
+</form>
+
+
+</html>
+
+{% endblock %}
