@@ -1,0 +1,5 @@
+{
+    "mongo_connection": "mongodb+srv://admin:admin@phanimongo.y4sv8.mongodb.net/db?ssl=true&retryWrites=true&w=majority",
+    "postgresql_connection":"postgresql://aizqbccpgrbsxd:1e86dca48f509185b1bd79d82c525513563a628a93b3e387c0b0b5d9bbfe6272@ec2-44-194-201-94.compute-1.amazonaws.com:5432/d3rhefrug9ocbu",
+    "mongo_dbname":"db"
+}
