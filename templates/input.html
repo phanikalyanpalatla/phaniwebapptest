@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% block content %}
 <html>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!doctype html>
 <title>Upload CSV file</title>
 <br>
@@ -10,6 +10,18 @@
     input {text-align: center;}
     form{text-align: center;}
 </style>
+
+<style> 
+    input[type=button], input[type=submit] {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 14px 40px;
+      text-align: center;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    </style>
 
 <form action="/upload" method=post enctype=multipart/form-data>
 <label>Input For</label>
